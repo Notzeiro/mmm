@@ -1,0 +1,113 @@
+import pyfiglet
+import time
+
+welcome=pyfiglet.figlet_format("Bienvenido al supermercado")
+print (welcome)
+time.sleep(0)
+
+groceries=[]
+prices=[]
+name=""
+
+def input_name():
+    global name
+    
+    b=False
+    while True:
+        try:
+            if b==True:
+                break
+            name=input("Ingrese su nombre:\n")
+            while True:
+                a=int(input(f"Has ingresado {name}, es eso correcto?\n1.-Si\n2.-No\n"))
+                if a==1:
+                    print(f"Bienvenido {name}") 
+                    b=True
+                    break
+                elif a==2:
+                    break
+                else:
+                    print("Ingreso erroneo, intente nuevamente")
+        except:
+            print("Lo sentimos algo ha ocurrido, por favor intente denuevo") 
+def menu():
+    global groceries, prices
+    c=1
+    SALIR=False
+    while True:
+        try:
+            if SALIR==True:
+                break
+            menu=int(input("1.-Ingresar articulos\n2.-Eliminar articulo\n3.-Ver carrito\n4.-Terminar compra\n5.-Cancelar compra\n\n"))
+            match menu:
+                case 1: #ingresar articulo
+                    while True:
+                            if c==2:
+                                break
+                            product=input("Ingrese el nombre del articulo:\n")
+                            units=int(input(f"Cuantas unidades de {product} desea llevar?\n"))
+                            for i in range(units):
+                                groceries.append(product)
+                            price=int(input(f"Ingrese el valor de {product}"))
+                            
+                            for i in range(units):
+                                prices.append(price)
+                            c=int(input("Desea agregar otro articulo?\n1.-Si\n2.-No, volver atras\n\n"))
+                            if c==1:
+                                continue
+                            elif c==2:
+                                break
+                            else:
+                                print("Por favor ingrese una opcion valida\n")
+                case 2: #eliminar articulo
+                    del_articles()
+                case 3: #ver carrito
+                    for index, i in enumerate(groceries):
+                        print((index) , ".-" , (i) , "............." , (prices [index] ))
+                    print("---------------------------------------")
+                    print(f"Total de articulos:                {len(groceries)} ")
+                    print(f"El total de su boleta es de:  {sum(prices)}")     
+                case 4: #terminar compra (mostrar total)
+                    print ("---------B O L E T A---------")
+                    for index, i in enumerate(groceries):
+                        print((index) , ".-" , (i) , "............." , (prices [index] ))
+                    print("---------------------------------------")
+                    print(f"Total de articulos:                {len(groceries)} ")
+                    subtotal=sum(prices)
+                    total=subtotal*1.19
+                    puntos=subtotal*0.1
+                    print(f"Subtotal: {subtotal}")
+                    print(f"El total de su boleta con IVA es de:  {total}")
+                    print(f"Gracias por su compra {name}\nCon esta compra acumulo {puntos} puntos\n\n")
+                    SALIR=True
+                    break
+                case 5: #Cancelar todo
+                    print("Adios")
+                    break
+        except:
+            print("Por favor ingrese una opcion valida")
+def del_articles():
+    global prices, groceries
+    
+    try:
+        while True:
+            print("Que articulo desea eliminar?\n")
+            for index, i in enumerate(groceries):
+                print((index) , ".-" , (i) , "............." , (prices [index] ))
+                art_to_elim=int(input(""))
+                del prices [art_to_elim]
+                del groceries [art_to_elim]
+            l=int(input("Desea eliminar otro articulo?\n1.-Si\n2.-No, salir\n"))
+            if l==1:
+                continue
+            elif l==2:
+                break
+            else:
+                print("por favor ingrese una opcion valida")
+    except:
+        print("Lo sentimos algo ocurrio.. por favor intenta nuevamente")
+        
+#PROGRAM BELOW
+input_name()
+menu()
+
