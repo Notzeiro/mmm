@@ -36,7 +36,8 @@ def busqueda_alumno():
                         gogogogo=input("\n\nPresione cualquier tecla para volver atras\n")
 
                 case 2:
-                    bus=input("Ingrese el rut del alumno a buscar\n")
+                    encontrado=False
+                    bus=str(input("Ingrese el rut del alumno a buscar\n"))
                     for alumno in alumnos:
                         if bus == alumno["rut"]:
                             encontrado=True
