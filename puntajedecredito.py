@@ -5,6 +5,7 @@ try:
     nacionalidad=int(input("Cual es su nacionalidad?\n1.-Chilena\n2.-Extranjera\n"))
     nivel_educacional=int(input("Cual es su nivel de educacion?\n1.-Educacion basica\n2.-Educacion media\n2.-Educacion superior\n"))
     ingreso=int(input("Cual es su ingreso mensual?\n"))
+    
     if ingreso>=500000 and ingreso<=1000000:
         credito=300000
     elif ingreso>=1000000 and ingreso<=1500000:
